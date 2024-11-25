@@ -15,6 +15,11 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "<h1>Welcome to my site!</h1>")
 }
 
+func faqHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	fmt.Fprint(w, "<h1>FAQ</h1><p><ul><li>Name: Alex Hewitt</li><li>Occupation: Software developer</li><li>Learning: Golang</li></ul></p>")
+}
+
 type Router struct{}
 
 func (router Router) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -23,6 +28,8 @@ func (router Router) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		homeHandler(w, r)
 	case "/contact":
 		contactHandler(w, r)
+	case "/faq":
+		faqHandler(w, r)
 	default:
 		http.Error(w, "Page not found", http.StatusNotFound)
 	}
