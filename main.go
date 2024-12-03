@@ -10,20 +10,15 @@ import (
 )
 
 func contactHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	tplPath := "templates/contact.gohtml"
-	executeTemplate(w, tplPath)
+	executeTemplate(w, "templates/contact.gohtml")
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	tplPath := "templates/home.gohtml"
-	executeTemplate(w, tplPath)
+	executeTemplate(w, "templates/home.gohtml")
 }
 
 func faqHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	fmt.Fprint(w, "<h1>FAQ</h1><p><ul><li>Name: Alex Hewitt</li><li>Occupation: Software developer</li><li>Learning: Golang</li></ul></p>")
+	executeTemplate(w, "templates/faq.gohtml")
 }
 
 func executeTemplate(w http.ResponseWriter, filepath string) {
