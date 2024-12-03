@@ -16,6 +16,8 @@ type User struct {
 }
 
 func main() {
+	// TODO: Example 3
+	// TODO: Example 4
 	t, err := template.ParseFiles("hello.gohtml")
 	if err != nil {
 		panic(err)
