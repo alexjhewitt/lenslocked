@@ -11,12 +11,24 @@ import (
 
 func contactHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	fmt.Fprint(w, "<h1>Contact Page</h1><p>To get in touch, email me at <a href=\"mailto:alexhewitt.j@gmail.com\">alexhewitt.j@gmail.com</a>.</p>")
+	tplPath := "templates/contact.gohtml"
+	executeTemplate(w, tplPath)
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	tpl, err := template.ParseFiles("templates/home.gohtml")
+	tplPath := "templates/home.gohtml"
+	executeTemplate(w, tplPath)
+}
+
+func faqHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	fmt.Fprint(w, "<h1>FAQ</h1><p><ul><li>Name: Alex Hewitt</li><li>Occupation: Software developer</li><li>Learning: Golang</li></ul></p>")
+}
+
+func executeTemplate(w http.ResponseWriter, filepath string) {
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	tpl, err := template.ParseFiles(filepath)
 	if err != nil {
 		log.Printf("parsing template: %v", err)
 		http.Error(w, "There was an error parsing the template.", http.StatusInternalServerError)
@@ -28,11 +40,6 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "There was an error executing the template.", http.StatusInternalServerError)
 		return
 	}
-}
-
-func faqHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	fmt.Fprint(w, "<h1>FAQ</h1><p><ul><li>Name: Alex Hewitt</li><li>Occupation: Software developer</li><li>Learning: Golang</li></ul></p>")
 }
 
 func main() {
